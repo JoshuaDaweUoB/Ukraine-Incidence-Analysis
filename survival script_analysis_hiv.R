@@ -1,5 +1,5 @@
 # load packages
-pacman::p_load(arsenal, survival, readxl, dplyr)
+pacman::p_load(arsenal, survival, readxl, dplyr, epitools)
 
 ## set wd
 setwd("C:/Users/vl22683/OneDrive - University of Bristol/Documents/Publications/Sex work and risk of HIV and HCV/Emails to authors/Ukraine data/Data")
