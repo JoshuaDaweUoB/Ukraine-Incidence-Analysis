@@ -174,6 +174,21 @@ testing_df <- testing_df %>%
 # merge
 analysis_data_hcv_clean <- left_join(exposure_df, testing_df, by = c("ID", "id_seq"))
 
+# Remove rows where rec_sw_sell_90d is NA
+analysis_data_hcv_clean <- analysis_data_hcv_clean %>%
+  filter(!is.na(rec_sw_sell_90d))
+
+# Create days_risk variable
+analysis_data_hcv_clean <- analysis_data_hcv_clean %>%
+  mutate(days_risk = months_risk * 30.4)
+
+# convert numeric to factor variables
+analysis_data_hcv_bl$sex <- factor(analysis_data_hcv_bl$sex)
+analysis_data_hcv_bl$rec_homeless <- factor(analysis_data_hcv_bl$rec_homeless)
+analysis_data_hcv_bl$rec_incarc_6m <- factor(analysis_data_hcv_bl$rec_incarc_6m)
+analysis_data_hcv_bl$rec_oat_6m <- factor(analysis_data_hcv_bl$rec_oat_6m)
+analysis_data_hcv_bl$rec_sw_sell_90d <- factor(analysis_data_hcv_bl$rec_sw_sell_90d)
+
 hcv_rslt_summary <- table(analysis_data_hcv_long$hcv_rslt)
 print(hcv_rslt_summary)
 
