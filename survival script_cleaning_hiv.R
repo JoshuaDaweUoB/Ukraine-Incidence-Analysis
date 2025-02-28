@@ -170,6 +170,14 @@ testing_df <- testing_df %>%
 # merge
 analysis_data_hiv_clean <- left_join(exposure_df, testing_df, by = c("ID", "id_seq"))
 
+# Remove rows where rec_sw_sell_90d is NA
+analysis_data_hiv_clean <- analysis_data_hiv_clean %>%
+  filter(!is.na(rec_sw_sell_90d))
+
+# Create days_risk variable
+analysis_data_hiv_clean <- analysis_data_hiv_clean %>%
+  mutate(days_risk = months_risk * 30.4)
+
 hiv_rslt_summary <- table(analysis_data_hiv_long$hiv_rslt)
 print(hiv_rslt_summary)
 
